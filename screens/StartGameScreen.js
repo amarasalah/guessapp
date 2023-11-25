@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-import { TextInput, View, StyleSheet, Alert } from "react-native";
+import { Text, TextInput, View, StyleSheet, Alert } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import Title from "../components/ui/Title";
 import Colors from "../constants/colors";
 
 function StartGameScreen({ onPickNumber }) {
@@ -27,22 +28,26 @@ function StartGameScreen({ onPickNumber }) {
     setEnteredNumber("");
   }
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        maxLength={2}
-        style={styles.numberInput}
-        keyboardType="number-pad"
-        autoCapitalize="none"
-        autoCorrect={false}
-        value={enteredNumber}
-        onChangeText={inputTextHandler}
-      />
-      <View style={styles.buttonsDisplayRow}>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
-        </View>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={confirmInputText}>Confirm</PrimaryButton>
+    <View style={styles.rootContainer}>
+      <Title> Guess My Number</Title>
+      <View style={styles.inputContainer}>
+        <Text style={styles.instructionText}>Enter A Number</Text>
+        <TextInput
+          maxLength={2}
+          style={styles.numberInput}
+          keyboardType="number-pad"
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={enteredNumber}
+          onChangeText={inputTextHandler}
+        />
+        <View style={styles.buttonsDisplayRow}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={confirmInputText}>Confirm</PrimaryButton>
+          </View>
         </View>
       </View>
     </View>
@@ -51,10 +56,19 @@ function StartGameScreen({ onPickNumber }) {
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    marginTop: 100,
+    alignItems: "center",
+  },
+  instructionText: {
+    color: Colors.accent500,
+    fontSize: 24,
+  },
   inputContainer: {
     alignItems: "center",
     padding: 16,
-    marginTop: 100,
+    marginTop: 36,
     // flex: 1,
     backgroundColor: Colors.primary800,
     borderRadius: 8,
