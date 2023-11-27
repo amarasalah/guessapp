@@ -5,8 +5,12 @@ import { LinearGradient } from "expo-linear-gradient";
 import GameScreen from "./screens/GameScreen";
 import Colors from "./constants/colors";
 import GameOverScreen from "./screens/GameOverScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Login from "./screens/Login";
 
 export default function App() {
+  const Stack = createNativeStackNavigator();
   const [userNumber, setUserNumber] = useState();
   const [gameIsOver, SetGameIsOver] = useState(true);
 
@@ -34,19 +38,29 @@ export default function App() {
   }
 
   return (
-    <LinearGradient
-      colors={[Colors.primary700, Colors.accent500]}
-      style={styles.rootScreen}
-    >
-      <ImageBackground
-        source={require("./assets/images/riho-kroll-m4sGYaHYN5o-unsplash.jpg")}
-        style={styles.rootScreen}
-        imageStyle={styles.backgroundImage}
-        resizeMode="cover"
-      >
-        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
-      </ImageBackground>
-    </LinearGradient>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+    // <LinearGradient
+    //   colors={[Colors.primary700, Colors.accent500]}
+    //   style={styles.rootScreen}
+    // >
+    //   {/* <ImageBackground
+    //     source={require("./assets/images/riho-kroll-m4sGYaHYN5o-unsplash.jpg")}
+    //     style={styles.rootScreen}
+    //     imageStyle={styles.backgroundImage}
+    //     resizeMode="cover"
+    //   >
+
+    //     <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+    //   </ImageBackground>
+    // </LinearGradient> */}
   );
 }
 
